@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
@@ -34,6 +35,19 @@ public class ControllerApp {
         return "register";
     }
 
+    @GetMapping
+    @RequestMapping("login")
+    public String login(UserAgencyReq userAgencyReq, Model model) {
+        model.addAttribute("userAgency",userAgencyReq);
+        return "login";
+    }
+
+    @PostMapping("login")
+    public String home(User userAgencyReq) {
+//        model.addAttribute("userAgencyReq",userAgencyReq);
+        return "index";
+    }
+
     @PostMapping("register")
     public String saveBook(UserAgencyReq UserAgency) {
         user = new User();
@@ -41,7 +55,7 @@ public class ControllerApp {
         user.setFirstname(UserAgency.getFirstname());
         user.setLastname(UserAgency.getLastname());
         user.setEmail(UserAgency.getEmail());
-        user.setPassword(UserAgency.getPassword());
+        user.setPassword(user.setHashPassword(UserAgency.getPassword()));
         user.setMobileNumber(UserAgency.getContactNumb());
         user.setRoles("Admin");
         user_DAO.save(user);
