@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--<div th:replace="fragments/header :: head"></div>-->
+<body>
+<!--<div th:replace="fragments/header :: nav-header"></div>-->
+<h2 class="col-auto mr-auto p-3 text-center" style="font-family:Kavoon">Tabel Item Barang</h2>
+<a href="/signup" class="btn btn-primary" style="margin-left:130px;margin-bottom:40px;"><i
+        class="fas fa-user-plus ml-2"> Add Student</i></a>
+<table class="table table-striped" style="width:80%" align="center">
+<!--    <thead>-->
+    <tr class="thead-dark text-center">
+        <th>NIM</th>
+        <th>Nama</th>
+        <th>Jurusan</th>
+        <th>IPK</th>
+        <th>Action</th>
+    </tr>
+<!--    </thead>-->
+    <tr th:each="page : ${page}"  class="text-center">
+        <td th:text="${page.nim}" />
+        <td th:text="${page.name}">
+        <td th:text="${page.jurusan}" />
+        <td th:text="${page.ipk}" />
+        <td><a th:href="@{/edit/{id}(id=${page.id})}" class="btn btn-primary">Edit</a>
+            <a th:href="@{/delete/{id}(id=${page.id})}" class="btn btn-danger">Delete</a>
+        <a  th:data-url="${page.id}"
+            onclick="showDetail(this.getAttribute('data-url'));" class="btn btn-success" data-toggle="modal" >
+            Show
+        </a>
+    </td>
+    </tr>
+</table>
+
+<ul class="pagination-div text-center">
+<!--    <ul class="pagination">-->
+<!--    <li class="page-item disabled">-->
+<!--        <span class="page-link">Previous</span>-->
+<!--    </li>-->
+    <div>
+
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+            <li class="page-item" th:if="${page.hasPrevious()}">
+                <a th:href="@{/(page=${page.number-1},size=${page.size})}" class="page-link">Previous</a>
+            </li>
+            <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                <li th:if="${page.number == i}" class="page-item active"><a href="#" class="page-link">[[${i}+1]]</a></li>
+                <li th:unless="${page.number == i}" class="page-item">
+                    <a th:href="@{/(page=${i},size=${page.size})}" class="page-link">[[${i}+1]]</a>
+                </li>
+            </th:block>
+            <li class="page-item" th:if="${page.hasNext()}">
+                <a th:href="@{/(page=${page.number+1},size=${page.size})}" class="page-link">Next</a>
+            </li></li>
+        </ul>
+    </div><br>
+    <div>Showing <td th:text="${((page.number+1)*3)-2}" /> to
+        <span th:if="${((page.number+1)*3) > totalMahasiswa}" th:text="${totalMahasiswa}"/>
+        <span th:unless="${((page.number+1)*3) > totalMahasiswa}" th:text="${((page.number+1)*3)}"/>
+        </span> of <td th:text="${totalMahasiswa}" /> entries</div>
+</ul>
+
+<!-- Modal Show-->
+<div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="editModalTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="updateItemForm" action="#" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalTitle">Data Mahasiswa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <td class="table-modal">
+                                Nama
+                            </td>
+                            <td class="table-modal">
+                                <input type="text" id="itemName" readonly>
+                                <input type="hidden" id="itemId">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                NIM
+                            </td>
+                            <td>
+                                <input type="text" id="itemPrice" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Jurusan
+                            </td>
+                            <td>
+                                <input type="text" id="itemType" readonly>
+                            </td>
+                        </tr>
+                        <!--                        <tr>-->
+                        <!--                            <td>-->
+                        <!--                                Description-->
+                        <!--                            </td>-->
+                        <!--                            <td>-->
+                        <!--                                <textarea class="modal-text-area" id="itemDescription"></textarea>-->
+                        <!--                            </td>-->
+                        <!--                        </tr>-->
+                        <tr>
+                            <td>
+                                IPK
+                            </td>
+                            <td>
+                                <input type="text" id="itemStock" readonly>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+<!--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--                    <button type="submit" class="btn btn-primary">Save changes</button>-->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Delete-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalTitle">Delete item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="itemNameDelete"></p>
+                <input type="hidden" id="deletedId">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" onclick="deleteItem()">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<!--<script type="text/javascript" th:src="@{/js/itemTable.js}"></script>-->
+<script type="text/javascript" th:src="@{/js/mahasiswaTable.js}"></script>
+<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+
+<!--&lt;!&ndash;    7. Con-->
+</body>
+</html>
