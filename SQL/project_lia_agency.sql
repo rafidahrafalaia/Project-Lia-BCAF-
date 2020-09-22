@@ -1,0 +1,57 @@
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+--
+-- Host: localhost    Database: project_lia
+-- ------------------------------------------------------
+-- Server version	8.0.21
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `agency`
+--
+
+DROP TABLE IF EXISTS `agency`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `agency` (
+  `id` varchar(255) NOT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `details` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `owner` varchar(255) DEFAULT NULL,
+  `created_date` datetime(6) NOT NULL,
+  `updated_date` datetime(6) DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `agency`
+--
+
+LOCK TABLES `agency` WRITE;
+/*!40000 ALTER TABLE `agency` DISABLE KEYS */;
+INSERT INTO `agency` VALUES ('1dfb9053-d2b0-4558-98ed-5539853f1e9b',NULL,'haha','Agency111','876b846a-ad17-48cb-a0e8-3a451675c88a','0000-00-00 00:00:00.000000',NULL,NULL),('42621c7a-4743-4bba-a3da-80f17da02f1f',NULL,'agency','agency',NULL,'2020-08-29 14:51:00.448000',NULL,'b773ca58-1533-46a7-9e9d-8a85de146c78'),('6f84a5d5-0334-434a-b0f9-2c5849d4b759',NULL,'afff','Agency111',NULL,'2020-09-08 23:31:22.749000',NULL,'a8d8699a-a20f-433a-b2a1-6010175d37b9'),('9adf8c53-d875-40d8-888c-0e2843fa2d6d',NULL,'afff','Agency111',NULL,'2020-09-08 23:31:23.001000',NULL,'e34a93b5-16ef-4b2f-905b-d6537560b180'),('a25eb2d6-24b8-418c-8fdd-f879ee267a66',NULL,'xxx','Agency111','03553a1c-a0f3-468b-8490-f9ff6f13f72e','0000-00-00 00:00:00.000000',NULL,NULL),('b06b728d-e421-4b56-b350-9a0f68cedc76',NULL,'agency','agency',NULL,'2020-08-29 16:22:14.926000',NULL,'ea392684-4e9a-43b4-84c3-e14c529099f2'),('c706eaaa-8129-40a8-8b38-13215c1f5a3e',NULL,'agency','agency',NULL,'2020-08-28 10:02:25.937000',NULL,'7cd558d0-9e61-40bc-9026-9104a8d58f60'),('c90e7455-9f2f-4915-a957-a845de22b82e',NULL,'xxx','czxcz','bcefde7a-84d8-4240-a03d-0f4ebc6815bf','0000-00-00 00:00:00.000000',NULL,NULL),('dec8ffaa-1a13-4d6b-84bc-0c137c4f6031',NULL,'anak dajjalkjk','sad',NULL,'2020-08-29 18:11:43.756000','2020-09-08 09:53:19.373000','824537d7-a1dd-4a4d-9d99-a3ed0a9103dd'),('ec47c07c-d1ac-4053-82f1-338504eddf6f',NULL,'agency','agency',NULL,'2020-08-29 16:18:24.164000',NULL,'189df082-d512-4b5c-9a02-87af4b9eb7df'),('f0f527d1-f0b2-4516-a11a-022e026803e7',NULL,'agency12312','agency',NULL,'2020-08-29 17:49:16.843000',NULL,'f7aed8a4-3253-4ea2-b5b7-ffb3511f7afd'),('f739a48b-e77e-413a-88f4-5a05883233d9',NULL,'kemmeme','Agency321','517ddf0b-e011-42c8-9735-08a3eb7abf79','0000-00-00 00:00:00.000000',NULL,NULL);
+/*!40000 ALTER TABLE `agency` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-09-22  9:59:46
