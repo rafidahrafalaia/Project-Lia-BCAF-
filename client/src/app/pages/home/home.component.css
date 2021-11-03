@@ -1,0 +1,6 @@
+ngb-modal-window[role="dialog"] {
+    display:flex;
+    position: fixed;
+    left: 400px;
+    top: 200px;   
+  }

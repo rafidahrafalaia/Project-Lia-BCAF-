@@ -1,0 +1,663 @@
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+          <!-- ========== Left Sidebar Start ========== -->
+          <div class="left side-menu">
+
+              <!-- LOGO -->
+              <div class="topbar-left">
+                  <div class="">
+                      <!--<a href="index.html" class="logo text-center">Admiria</a>-->
+                      <a href="index.html" class="logo" ><img src="assets/images/logo-sm.png" height="56" alt="logo" style="margin-left: 65px;"></a>
+                  </div>
+              </div>
+
+              <div class="sidebar-inner slimscrollleft">
+                  <div id="sidebar-menu">
+                      <ul>
+                          <li class="menu-title">Main</li>
+                          <li class="has_sub">
+                            <a routerLink="/docustInput" class="waves-effect"><i class="mdi mdi-file-document"></i> <span> Input</span> </a>
+                        </li>
+                          <li>
+                              <a routerLink="/docustRecive" class="waves-effect"><i class="mdi mdi-cube-outline"></i><span> Recive </span></a>
+                          </li>
+                          <li class="has_sub">
+                              <a routerLink="/docustRelease" class="waves-effect"><i class="mdi mdi-exit-to-app"></i><span> Release </span></a>
+                          </li>
+                          <li class="has_sub">
+                            <a routerLink="/borrowAllDocust" class="waves-effect"><i class="mdi mdi-exit-to-app"></i><span> Pengajuan Borrow </span></a>
+                        </li>
+                        <li class="has_sub">
+                          <a routerLink="/returnAllDocust" class="waves-effect"><i class="mdi mdi-exit-to-app"></i><span> Dokumen Return </span></a>
+                      </li>
+                          <!-- <li>
+                              <a routerLink="/trips" class="waves-effect"><i class="mdi mdi-road-variant"></i><span> Trips </span></a>
+                          </li>
+                          <li>
+                              <a routerLink="/profile"  class="waves-effect"><i class="mdi mdi-account-circle"></i><span> Profile </span></a>
+                          </li> -->
+                      </ul>
+                  </div>
+                  <div class="clearfix"></div>
+              </div> <!-- end sidebarinner -->
+          </div>
+          <!-- Left Sidebar End -->
+
+          <!-- Start right Content here -->
+          <div class="content-page">
+              <!-- Start content -->
+              <div class="content">
+
+                  <!-- Top Bar Start -->
+                  <div class="topbar">
+
+                      <nav class="navbar-custom">
+                          <!-- Search input -->
+                          <div class="search-wrap" id="search-wrap">
+                              <div class="search-bar">
+                                  <input class="search-input" type="search" placeholder="Search" />
+                                  <a href="#" class="close-search toggle-search" data-target="#search-wrap">
+                                      <i class="mdi mdi-close-circle"></i>
+                                  </a>
+                              </div>
+                          </div>
+
+                          <ul class="list-inline float-right mb-0">
+                              <!-- Search -->
+                              <li class="list-inline-item dropdown notification-list">
+                                  <a class="nav-link waves-effect toggle-search" href="#"  data-target="#search-wrap">
+                                      <i class="mdi mdi-magnify noti-icon"></i>
+                                  </a>
+                              </li>
+                             
+                              <li class="list-inline-item dropdown notification-list">
+                                  <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
+                                     aria-haspopup="false" aria-expanded="false">
+                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{userData.name}}</span> 
+                                     <img src="../../assets/images/logo_login.jpg" alt="user" class="rounded-circle">
+                                  </a>
+                                  <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                      <a class="dropdown-item" routerLink="/profile"><i class="dripicons-user text-muted"></i> Profile</a>
+                                      <a class="dropdown-item" href="#"><i class="dripicons-lock text-muted"></i> Lock screen</a>
+                                      <div class="dropdown-divider"></div>
+                                      <a class="dropdown-item" (click)="doLogout()"><i class="dripicons-exit text-muted"></i> Logout</a>
+                                  </div>
+                              </li>
+                          </ul>
+
+                          <!-- Page title -->
+                          <ul class="list-inline menu-left mb-0">
+                              <li class="list-inline-item">
+                                  <button type="button" class="button-menu-mobile open-left waves-effect">
+                                      <i class="ion-navicon"></i>
+                                  </button>
+                              </li>
+                              <li class="hide-phone list-inline-item app-search">
+                                  <h3 class="page-title">Docust</h3>
+                              </li>
+                          </ul>
+
+                          <div class="clearfix"></div>
+                      </nav>
+
+                  </div>
+                  <!-- Top Bar End -->
+
+                  <!-- ==================
+                       PAGE CONTENT START
+                       ================== -->
+      <!-- Begin Page Content -->
+            
+          <div class="container-fluid">
+
+              <!-- Page Heading -->
+              <h1 class="h3 mb-2 text-gray-800">DOCUST RELEASE</h1>
+              <!-- <p class="mb-4">Bus The Good Transport</p> -->
+
+              <!--<editor-fold desc="Table Bus">-->
+
+              <!-- DataTales Example -->
+              <div class="card shadow mb-4">
+                  <!--<editor-fold desc="Commended Tittle top table">-->
+                  <!--                    <div class="card-header py-3">-->
+                  <!--                        <h6 class="m-0 font-weight-bold text-primary">Buses</h6>-->
+                  <!--                    </div>-->
+
+                  <!--</editor-fold>-->
+ <!-- Modal cek -->
+ <ng-template #modalcek let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title" [(ngModel)]="kontrak.nomor">Are you sure?</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+  <span aria-hidden="true">×</span>
+</button>
+  </div>
+  <div class="modal-body">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">No</button>
+      <button type="button" class="btn btn-outline-dark" (click)="selectedRow(kontrak.nomor)">Yes</button>
+  </div>
+</ng-template>
+<!-- Modal delete -->
+<ng-template #modaldelete let-modal>
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" [(ngModel)]="kontrak.nomor">Do you want to continue delete?</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+<span aria-hidden="true">×</span>
+</button>
+</div>
+<div class="modal-body">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">No</button>
+    <button type="button" class="btn btn-outline-dark" (click)="selectedRowDelete(kontrak.nomor)">Yes</button>
+</div>
+</ng-template>
+
+                  <!-- Modal Edit -->
+                  <ng-template #mymodal let-modal class="ngb-modal-window">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">DETAIL KONTRAK</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">×</span>
+                </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row" style="margin-left: 10px;">
+                        <h5>Nomor</h5>
+                    </div>
+                    <div class="row" style="margin-left: 10px;margin-bottom: 15px;">
+                        <input class="form-control col-sm-11" type="text" [(ngModel)]="kontrak.nomor" placeholder="{{kontrak.nomor}}">
+                    </div>
+                    <div class="row" style="margin-left: 10px;">
+                      <h5>Nama</h5>
+                  </div>
+                  <div class="row" style="margin-left: 10px;margin-bottom: 15px;">
+                      <input class="form-control col-sm-11" type="text" [(ngModel)]="kontrak.nama" placeholder="{{kontrak.nama}}">
+                  </div>
+                  <div class="row" style="margin-left: 10px;">
+                    <h5>Tanggal Realisasi</h5>
+                </div>
+                <div class="row" style="margin-left: 10px;margin-bottom: 15px;">
+                  <input [ngModel]="kontrak.tglRealisasi | date:'dd-MM-yyy'" 
+      (ngModelChange)="kontrak.tglRealisasi = $event" type="text" onfocus="(this.type='date')" name="kontrak.tglRealisasi"/> </div>
+                  <div class="row" style="margin-left: 10px;">
+                    <h5>Jenis SGU</h5>
+                </div>
+                <div class="row" style="margin-left: 10px;margin-bottom: 15px;">
+                  <span *ngIf="kontrak.jenisSGU=== 'slb'">
+                    <select #selectElem (change)="setNewUser(selectElem.value)">
+                      <option [(ngModel)]="jenisSGU" value="slb">Sale & Lease Back</option>
+                        <option [(ngModel)]="jenisSGU" value="dl">Direct Lease</option>
+                    </select>
+                  </span>
+                  <span *ngIf="kontrak.jenisSGU=== 'dl'">
+                    <select #selectElem (change)="setNewUser(selectElem.value)">
+                      <option [(ngModel)]="jenisSGU" value="dl">Direct Lease</option>
+                      <option [(ngModel)]="jenisSGU" value="slb">Sale & Lease Back</option>
+                  </select>
+                  </span>
+                </div> 
+                 <div class="row" style="margin-left: 10px;">
+                  <h5>DOKUMEN JAMINAN</h5>
+              </div>
+                <div class="row" style="margin-left: 10px;">
+                  <span *ngIf="kontrak.bpkb === false">BPKB:
+                    <select [(ngModel)]="kontrak2.bpkb" >
+                      <option [(ngModel)]="bpkb" [ngValue]="false">Tidak Ada</option>
+                      <option [(ngModel)]="bpkb" [ngValue]="true">Ada</option>
+                  </select>
+                  </span>
+                  <span *ngIf="kontrak.bpkb === true">BPKB:
+                    <select [(ngModel)]="kontrak2.bpkb" >
+                      <option [(ngModel)]="bpkb" [ngValue]="true">Ada</option>
+                      <option [(ngModel)]="bpkb" [ngValue]="false">Tidak Ada</option>
+                  </select>
+                </span>
+              </div>
+                <div class="row" style="margin-left: 15px;">
+                  <span *ngIf="kontrak.bast === false">BAST: 
+                    <select [(ngModel)]="kontrak2.bast" >
+                      <option [(ngModel)]="bast" [ngValue]="false">Tidak Ada</option>
+                      <option [(ngModel)]="bast" [ngValue]="true">Ada</option>
+                  </select>
+                </span>
+                  <span *ngIf="kontrak.bast === true">BAST:   
+                    <select [(ngModel)]="kontrak2.bast" >
+                      <option [(ngModel)]="bast" [ngValue]="true">Ada</option>
+                      <option [(ngModel)]="bast" [ngValue]="false">Tidak Ada</option>
+                  </select>
+                  </span>
+                </div>
+                  <div class="row" style="margin-left: 15px;">
+                    <span *ngIf="kontrak.cn === false">CN: 
+                      <select [(ngModel)]="kontrak2.cn" >
+                        <option [(ngModel)]="cn" [ngValue]="false">Tidak Ada</option>
+                        <option [(ngModel)]="cn" [ngValue]="true">Ada</option>
+                    </select>
+                  </span>
+                    <span *ngIf="kontrak.cn === true">CN:   
+                      <select [(ngModel)]="kontrak2.cn" >
+                        <option [(ngModel)]="cn" [ngValue]="true">Ada</option>
+                        <option [(ngModel)]="cn" [ngValue]="false">Tidak Ada</option>
+                    </select>
+                    </span>
+                  </div>
+                    <div class="row" style="margin-left: 15px;">
+                      <span *ngIf="kontrak.faktur === false">FAKTUR: 
+                        <select [(ngModel)]="kontrak2.faktur" >
+                          <option [(ngModel)]="faktur" [ngValue]="false">Tidak Ada</option>
+                          <option [(ngModel)]="faktur" [ngValue]="true">Ada</option>
+                      </select>
+                    </span>
+                      <span *ngIf="kontrak.faktur === true">FAKTUR:   
+                        <select [(ngModel)]="kontrak2.faktur" >
+                          <option [(ngModel)]="faktur" [ngValue]="true">Ada</option>
+                          <option [(ngModel)]="faktur" [ngValue]="false">Tidak Ada</option>
+                      </select>
+                      </span>
+                    </div>
+                      <div class="row" style="margin-left: 15px;">
+                        <span *ngIf="kontrak.polis === false">POLIS: 
+                          <select [(ngModel)]="kontrak2.polis" >
+                            <option [(ngModel)]="polis" [ngValue]="false">Tidak Ada</option>
+                            <option [(ngModel)]="polis" [ngValue]="true">Ada</option>
+                        </select>
+                      </span>
+                        <span *ngIf="kontrak.polis === true">POLIS:   
+                          <select [(ngModel)]="kontrak2.polis" >
+                            <option [(ngModel)]="polis" [ngValue]="true">Ada</option>
+                            <option [(ngModel)]="polis" [ngValue]="false">Tidak Ada</option>
+                        </select>
+                        </span>
+                      </div>
+                        <div class="row" style="margin-left: 15px;">
+                          <span *ngIf="kontrak.spHak === false">SP HAK: 
+                            <select [(ngModel)]="kontrak2.spHak" >
+                              <option [(ngModel)]="spHak" [ngValue]="false">Tidak Ada</option>
+                              <option [(ngModel)]="spHak" [ngValue]="true">Ada</option>
+                          </select>
+                        </span>
+                          <span *ngIf="kontrak.spHak === true">SP HAK:   
+                            <select [(ngModel)]="kontrak2.spHak" >
+                              <option [(ngModel)]="spHak" [ngValue]="true">Ada</option>
+                              <option [(ngModel)]="spHak" [ngValue]="false">Tidak Ada</option>
+                          </select>
+                          </span>
+                <!-- </div> -->
+                  <!-- <div class="row" style="margin-left: 10px;"> -->
+                  <!-- <span *ngIf="kontrak.jadwalSGU === false" >JadwalSGU:
+                     <select [(ngModel)]="kontrak2.jadwalSGU">
+                       <option  [(ngModel)]="jadwalSGU" [ngValue]="false">Tidak Ada</option>
+                    <option [(ngModel)]="jadwalSGU" [ngValue]="true">Ada</option>
+                   </select>
+                  </span>
+                  <span *ngIf="kontrak.jadwalSGU === true">JadwalSGU:
+                      <select [(ngModel)]="kontrak2.jadwalSGU" >
+                        <option [(ngModel)]="jadwalSGU" [ngValue]="true">Ada</option>
+                        <option [(ngModel)]="jadwalSGU" [ngValue]="false">Tidak Ada</option>
+                    </select>
+                </span> -->
+                  </div>
+                  <!-- <span [(ngModel)]="kontrak.memoHak" *ngIf="kontrak.memoHak === false">Memo Hak Opsi: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.memoHak" *ngIf="kontrak.memoHak === true">Memo Hak Opsi: <i class="fa fa-check" style="margin-right: 6px;"></i></span> -->
+                  <!-- <span [(ngModel)]="kontrak.buktiPenerimaan" *ngIf="kontrak.buktiPenerimaan === false">Bukti Penerimaan Barang: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.buktiPenerimaan" *ngIf="kontrak.buktiPenerimaan === true">Bukti Penerimaan Barang: <i class="fa fa-check" style="margin-right: 6px;"></i></span> -->
+                  <!-- <span [(ngModel)]="kontrak.sp_asuransi" *ngIf="kontrak.sp_asuransi === false">SP Asuransi: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.sp_asuransi" *ngIf="kontrak.sp_asuransi === true">SP Asuransi: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.suratKuasa" *ngIf="kontrak.suratKuasa === false">Surat Kuasa: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.suratKuasa" *ngIf="kontrak.suratKuasa === true">Surat Kuasa: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.spAnggaran" *ngIf="kontrak.spAnggaran === false">SP Anggaran Dasar: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.spAnggaran" *ngIf="kontrak.spAnggaran === true">SP Anggaran Dasar: <i class="fa fa-check" style="margin-right: 6px;"></i></span> -->
+                <!-- </div> -->
+                  <!-- <span [(ngModel)]="kontrak.persetujuanPasangan" *ngIf="kontrak.persetujuanPasangan === false">Surat Persetujuan Pasangan: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.persetujuanPasangan" *ngIf="kontrak.persetujuanPasangan === true">Surat Persetujuan Pasangan: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.persetujuanKomisaris" *ngIf="kontrak.persetujuanKomisaris === false">Surat Persetujuan Komisaris: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.persetujuanKomisaris" *ngIf="kontrak.persetujuanKomisaris === true">Surat Persetujuan Komisaris: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.buktiPeneyrahan" *ngIf="kontrak.buktiPeneyrahan === false">Bukti Penyerahan Barang: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.buktiPeneyrahan" *ngIf="kontrak.buktiPeneyrahan === true">Bukti Penyerahan Barang: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.spNonRUPS" *ngIf="kontrak.spNonRUPS === false">SP Tanpa RUPS: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.spNonRUPS" *ngIf="kontrak.spNonRUPS === true">SP Tanpa RUPS: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.perjanjianJualBeli" *ngIf="kontrak.perjanjianJualBeli === false">Perjanjian Jual Beli: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.perjanjianJualBeli" *ngIf="kontrak.perjanjianJualBeli === true">Perjanjian Jual Beli: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.pelepasanHak" *ngIf="kontrak.pelepasanHak === false">Surat Pernyataan Pelepasan Hak: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.pelepasanHak" *ngIf="kontrak.pelepasanHak === true">Surat Pernyataan Pelepasan Hak: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.penyerahanBPKB" *ngIf="kontrak.penyerahanBPKB === false">SP Penyerahan BPKB: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.penyerahanBPKB" *ngIf="kontrak.penyerahanBPKB === true">SP Penyerahan BPKB: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.jaminan" *ngIf="kontrak.jaminan === false">Surat Jaminan: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.jaminan" *ngIf="kontrak.jaminan === true">Surat Jaminan: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.sp_Direktur" *ngIf="kontrak.sp_Direktur === false">SP Direktur: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.sp_Direktur" *ngIf="kontrak.sp_Direktur === true">SP Direktur: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.beritaRUPS" *ngIf="kontrak.beritaRUPS === false">Berita Acara RUPS: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.beritaRUPS" *ngIf="kontrak.beritaRUPS === true">Berita Acara RUPS: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+                  <span [(ngModel)]="kontrak.sk_Rekening" *ngIf="kontrak.sk_Rekening === false">Surat Kuasa Pendebetan Rekening: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+                  <span  [(ngModel)]="kontrak.sk_Rekening" *ngIf="kontrak.sk_Rekening === true">Surat Kuasa Pendebetan Rekening: <i class="fa fa-check" style="margin-right: 6px;"></i></span> -->
+              <!-- </div>  -->
+              <!-- <div class="row" style="margin-left: 10px;margin-top: 15px;">
+                <h5>DOSIER COPY</h5>
+            </div>
+           <div class="row" style="margin-left: 10px;">
+              <span *ngIf="kontrak.pelunasan === false">Kuitansi Pelunasan:  
+                <select [(ngModel)]="kontrak2.pelunasan" >
+                  <option [(ngModel)]="pelunasan" [ngValue]="false">Tidak Ada</option>
+                  <option [(ngModel)]="pelunasan" [ngValue]="true">Ada</option>
+              </select>
+              </span>
+              <span *ngIf="kontrak.pelunasan === true">Kuitansi Pelunasan: 
+                <select [(ngModel)]="kontrak2.pelunasan" >
+                  <option [(ngModel)]="pelunasan" [ngValue]="true">Ada</option>
+                  <option [(ngModel)]="pelunasan" [ngValue]="false">Tidak Ada</option>
+                 </select>
+              </span> -->
+            <!-- </div>
+              <div class="row" style="margin-left: 10px;">
+              <span *ngIf="kontrak.persetujuanSGU === false">Memo Persetujuan SGU: 
+                <select [(ngModel)]="kontrak2.persetujuanSGU" >
+                  <option [(ngModel)]="persetujuanSGU" [ngValue]="false">Tidak Ada</option>
+                  <option [(ngModel)]="persetujuanSGU" [ngValue]="true">Ada</option>
+              </select>
+              </span>
+              <span *ngIf="kontrak.persetujuanSGU === true">Memo Persetujuan SGU:
+                <select [(ngModel)]="kontrak2.persetujuanSGU" >
+                  <option [(ngModel)]="persetujuanSGU" [ngValue]="true">Ada</option>
+                  <option [(ngModel)]="persetujuanSGU" [ngValue]="false">Tidak Ada</option>
+                 </select>
+              </span> -->
+              <!-- </div>
+              <div class="row" style="margin-left: 10px;">
+              <span *ngIf="kontrak.dp2 === false">Kuitansi DP: 
+                <select [(ngModel)]="kontrak2.dp2" >
+                  <option [(ngModel)]="dp2" [ngValue]="false">Tidak Ada</option>
+                  <option [(ngModel)]="dp2" [ngValue]="true">Ada</option>
+              </select>
+              </span>
+              <span *ngIf="kontrak.dp === true">Kuitansi DP: 
+                <select [(ngModel)]="kontrak2.dp2" >
+                  <option [(ngModel)]="dp2" [ngValue]="true">Ada</option>
+                  <option [(ngModel)]="dp2" [ngValue]="false">Tidak Ada</option>
+                 </select>
+              </span> -->
+              <!-- <span *ngIf="kontrak.buktiBayar === false">Bukti Bayar Provisi/Asuransi: 
+                <select [(ngModel)]="kontrak2.buktiBayar" >
+                  <option [(ngModel)]="buktiBayar" [ngValue]="false">Tidak Ada</option>
+                  <option [(ngModel)]="buktiBayar" [ngValue]="true">Ada</option>
+              </select>
+              </span>
+              <span *ngIf="kontrak.buktiBayar === true">Bukti Bayar Provisi/Asuransi:
+                <select [(ngModel)]="kontrak2.buktiBayar" >
+                  <option [(ngModel)]="buktiBayar" [ngValue]="true">Ada</option>
+                  <option [(ngModel)]="buktiBayar" [ngValue]="false">Tidak Ada</option>
+                </select>
+              </span> -->
+              <!-- <span [(ngModel)]="kontrak.rekeningBCA" *ngIf="kontrak.rekeningBCA === false">Rekening BCA: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.rekeningBCA" *ngIf="kontrak.rekeningBCA === true">Rekening BCA: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.barangModal" *ngIf="kontrak.barangModal === false">Lampiran Daftar Barang Modal: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.barangModal" *ngIf="kontrak.barangModal === true">Lampiran Daftar Barang Modal: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.ktpKonsumenPasang" *ngIf="kontrak.ktpKonsumenPasang === false">KTP Konsumen + Pasangan: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.ktpKonsumenPasang" *ngIf="kontrak.ktpKonsumenPasang === true">KTP Konsumen + Pasangan: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.fotoGesek" *ngIf="kontrak.foto_Gesek === false">Foto + Gesekan: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.fotoGesek" *ngIf="kontrak.foto_Gesek === true">Foto + Gesekan: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.k_3" *ngIf="kontrak.K3 === false">k_3: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.k_3" *ngIf="kontrak.K3 === true">k_3: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.kartuKeluarga" *ngIf="kontrak.kartuKeluarga === false">Kartu Keluarga: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.kartuKeluarga" *ngIf="kontrak.kartuKeluarga === true">Kartu Keluarga: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.aktaNikah" *ngIf="kontrak.aktaNikah === false">Akta Nikah: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.aktaNikah" *ngIf="kontrak.aktaNikah === true">Akta Nikah: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.npwp2" *ngIf="kontrak.npwp2 === false">NPWP: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.npwp2" *ngIf="kontrak.npwp2 === true">NPWP: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.tdp2" *ngIf="kontrak.tdp2 === false">TDP: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.tdp2" *ngIf="kontrak.tdp2 === true">TDP: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.siup2" *ngIf="kontrak.siup2 === false">SIUP: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.siup2" *ngIf="kontrak.siup2 === true">SIUP: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.ktpPengurus" *ngIf="kontrak.ktpPengurus === false">KTP Pengurus: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.ktpPengurus" *ngIf="kontrak.ktpPengurus === true">KTP Pengurus: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.domisiliPT" *ngIf="kontrak.domisiliPT === false">Surat Keterangan Domisili PT: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.domisiliPT" *ngIf="kontrak.domisiliPT === true">Surat Keterangan Domisili PT: <i class="fa fa-check" style="margin-right: 6px;"></i></span>
+              <span [(ngModel)]="kontrak.dokumenLain" *ngIf="kontrak.dokumenLain === false">Dokumen Lainnya: <i class="fa fa-ban" style="margin-right: 6px;"></i></span>
+              <span  [(ngModel)]="kontrak.dokumenLain" *ngIf="kontrak.dokumenLain === true">Dokumen Lainnya: <i class="fa fa-check" style="margin-right: 6px;"></i></span> -->
+              <!-- </div>  -->
+            </div>
+            <div class="row" style="margin-left: 10px;">
+              <h5>Keterangan</h5>
+          </div>
+          <div class="row" style="margin-left: 10px;margin-bottom: 15px;">
+              <textarea style="height:50px" class="form-control col-sm-11" type="text" [(ngModel)]="kontrak2.keterangan2" >{{kontrak2.keterangan2}}
+          </textarea>
+        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Close</button>
+                        <button type="button" class="btn btn-outline-dark" (click)="saveKontrak(kontrak.nomor)">Save</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Close</button>
+                        <button type="button" class="btn btn-outline-dark" (click)="saveKontrak(kontrak.nomor)">Save</button>
+                    </div>
+                  </ng-template>
+                  
+                  <div class="card-body">
+                    <button (click)="exportAsXLSX()">Download Excel</button>
+                      <div>                            
+                          <!-- <div class="form-group row">
+                              <button style="margin-left: 10px;" class="btn btn-outline-dark waves-effect waves-light" for="example-text-input" (click)="open(mymodal)">
+                                  <i class="mdi mdi-plus-circle" style="font-size:14px;">ADD BUS</i>
+                              </button>
+                              <div class="col-sm-4">
+                                  <input class="form-control" type="text" placeholder="Enter Name Bus" id="example-text-input" (keyup)="updateFilter($event)">
+                              </div>
+                          </div> -->
+                          <ngx-datatable
+                            #mydatatable
+                            class="material"
+                            [headerHeight]="50"
+                            [limit]="5"
+                            [columnMode]="ColumnMode.force"
+                            [footerHeight]="50"
+                            rowHeight="auto"
+                            [rows]="rows"
+                            [columns]="columnInput"
+                          >
+                          <ngx-datatable-column name="Nomor Kontrak" prop="nomor">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                              <span
+                                title="Double click to edit"
+                                (dblclick)="editing[rowIndex + '-nomor'] = true"
+                                *ngIf="!editing[rowIndex + '-nomor']"
+                              >
+                                {{ value }}
+                              </span>
+                              <input
+                                autofocus
+                                (blur)="updateValue($event, 'nomor', rowIndex)"
+                                *ngIf="editing[rowIndex + '-nomor']"
+                                type="text"
+                                [value]="value"
+                              />
+                            </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="Nama">
+                            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                              <span
+                                title="Double click to edit"
+                                (dblclick)="editing[rowIndex + '-nama'] = true"
+                                *ngIf="!editing[rowIndex + '-nama']"
+                              >
+                                {{ value }}
+                              </span>
+                              <input
+                                autofocus
+                                (blur)="updateValue($event, 'nama', rowIndex)"
+                                *ngIf="editing[rowIndex + '-nama']"
+                                type="text"
+                                [value]="value"
+                              />
+                            </ng-template>
+                          </ngx-datatable-column>
+                            <!-- <ngx-datatable-column name="jenisSGU">
+                              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                                <span
+                                  title="Double click to edit"
+                                  (dblclick)="editing[rowIndex + '-jenisSGU'] = true"
+                                  *ngIf="!editing[rowIndex + '-jenisSGU']"
+                                >
+                                  {{ value }}
+                                </span>
+                                <input
+                                  autofocus
+                                  (blur)="updateValue($event, 'jenisSGU', rowIndex)"
+                                  *ngIf="editing[rowIndex + '-jenisSGU']"
+                                  type="text"
+                                  [value]="value"
+                                />
+                              </ng-template>
+                            </ngx-datatable-column> -->
+                            <!-- <ngx-datatable-column name="BPKB">
+                              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                                <span
+                                  title="Double click to edit"
+                                  (dblclick)="editing[rowIndex + '-bpkb'] = true"
+                                  *ngIf="!editing[rowIndex + '-bpkb']"
+                                >
+                                <span *ngIf="value === false"><i class="fa fa-ban"></i></span>
+                                <span *ngIf="value === true"><i class="fa fa-check"></i></span>
+                                </span>
+                                <input
+                                  autofocus
+                                  (blur)="updateValue($event, 'bpkb', rowIndex)"
+                                  *ngIf="editing[rowIndex + '-bpkb']"
+                                  type="text"
+                                  [value]="value"
+                                />
+                              </ng-template>
+                            </ngx-datatable-column>
+                             <ngx-datatable-column name="CN">
+                              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                                <span
+                                  title="Double click to edit"
+                                  (dblclick)="editing[rowIndex + '-cn'] = true"
+                                  *ngIf="!editing[rowIndex + '-cn']"
+                                >
+                                <span *ngIf="value === false"><i class="fa fa-ban"></i></span>
+                                <span *ngIf="value === true"><i class="fa fa-check"></i></span>
+                                </span>
+                                <input
+                                  autofocus
+                                  (blur)="updateValue($event, 'cn', rowIndex)"
+                                  *ngIf="editing[rowIndex + '-cn']"
+                                  type="text"
+                                  [value]="value"
+                                />
+                              </ng-template>
+                            </ngx-datatable-column> 
+                            <ngx-datatable-column name="BAST">
+                              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                                <span
+                                  title="Double click to edit"
+                                  (dblclick)="editing[rowIndex + '-bast'] = true"
+                                  *ngIf="!editing[rowIndex + '-bast']"
+                                >
+                                <span *ngIf="value === false"><i class="fa fa-ban"></i></span>
+                                <span *ngIf="value === true"><i class="fa fa-check"></i></span>
+                                </span>
+                                <input
+                                  autofocus
+                                  (blur)="updateValue($event, 'bast', rowIndex)"
+                                  *ngIf="editing[rowIndex + '-bast']"
+                                  type="text"
+                                  [value]="value"
+                                />
+                              </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="FAKTUR">
+                              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                                <span
+                                  title="Double click to edit"
+                                  (dblclick)="editing[rowIndex + '-faktur'] = true"
+                                  *ngIf="!editing[rowIndex + '-faktur']"
+                                >
+                                <span *ngIf="value === false"><i class="fa fa-ban"></i></span>
+                                <span *ngIf="value === true"><i class="fa fa-check"></i></span>
+                                </span>
+                                <input
+                                  autofocus
+                                  (blur)="updateValue($event, 'faktur', rowIndex)"
+                                  *ngIf="editing[rowIndex + '-faktur']"
+                                  type="text"
+                                  [value]="value"
+                                />
+                              </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="SP HAK" prop="spHak">
+                              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                                <span
+                                  title="Double click to edit"
+                                  (dblclick)="editing[rowIndex + '-spHak'] = true"
+                                  *ngIf="!editing[rowIndex + '-spHak']"
+                                >
+                                <span *ngIf="value === false"><i class="fa fa-ban"></i></span>
+                                <span *ngIf="value === true"><i class="fa fa-check"></i></span>
+                                </span>
+                                <input
+                                  autofocus
+                                  (blur)="updateValue($event, 'spHak', rowIndex)"
+                                  *ngIf="editing[rowIndex + '-spHak']"
+                                  type="text"
+                                  [value]="value"
+                                />
+                              </ng-template>
+                            </ngx-datatable-column> -->
+                            <ngx-datatable-column name="Actions" sortable="false" prop="id" width=220>
+                              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                                <!-- <span
+                                  title="Double click to edit"
+                                  (dblclick)="editing[rowIndex + '-nama'] = true"
+                                  *ngIf="!editing[rowIndex + '-nama']"
+                                >
+                                  {{ value }}
+                                </span>
+                                <input
+                                  autofocus
+                                  (blur)="updateValue($event, 'nama', rowIndex)"
+                                  *ngIf="editing[rowIndex + '-nama']"
+                                  type="text"
+                                  [value]="value"
+                                /> -->
+                                <span>
+                                  <button md-icon-button (click)="opencek(modalcek,value)" style="margin-right: 4px;">Recive</button>
+                                  <button md-icon-button (click)="open(mymodal,value)" style="margin-right: 4px;">Detail</button>
+                                  <button md-icon-button (click)="opencek(modaldelete,value)">Delete</button>
+                                </span>
+                                <!-- <button md-icon-button (click)="selectedRow(value)">
+                                  <i class="fa fa-ban"></i>
+                              </button> -->
+                              </ng-template>
+                              <!-- <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row"> -->
+                                
+                                
+                              <!-- </template> -->
+                          </ngx-datatable-column>
+                          </ngx-datatable>
+                        </div>
+                  </div>
+              </div>
+              <!--</editor-fold>-->
+
+          </div>
+          <!-- /.container-fluid -->
+
+          <div class="page-content-wrapper">
+
+              <router-outlet></router-outlet>
+      
+          </div> <!-- Page content Wrapper -->
+      
+      </div> <!-- content -->
+      
+      <footer class="footer">
+          ©Copyright 2020 <span class="text-muted d-none d-sm-inline-block float-right">Crafted with <i class="mdi mdi-new-box text-dark"></i> by Lia</span>
+      </footer>
+      
+      </div>
+      <!-- End Right content here -->
+      
+      </div>
+      <!-- END wrapper -->
+      
